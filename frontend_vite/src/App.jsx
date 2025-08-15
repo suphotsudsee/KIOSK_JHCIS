@@ -76,8 +76,11 @@ export default function App() {
           กรุณาเสียบบัตรประชาชนก่อนยืนยันตัวตน
         </p>
         <div className="card-image">
-          <img src={cardImage} alt="ตัวอย่างบัตรประชาชน" />
-          {cardInfo && <ThaiIDCard info={cardInfo} />}
+          {cardInfo ? (
+            <ThaiIDCard info={cardInfo} />
+          ) : (
+            <img src={cardImage} alt="ตัวอย่างบัตรประชาชน" />
+          )}
         </div>
         <div className="buttons">
           <button className="btn primary" onClick={handleConfirm}>
