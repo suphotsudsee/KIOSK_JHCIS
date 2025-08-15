@@ -11,6 +11,7 @@ export default function App() {
   const [dbError, setDbError] = useState(false)
   const [cardInfo, setCardInfo] = useState(null)
   const [rightInfo, setRightInfo] = useState(null)
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   useEffect(() => {
     const timer = setInterval(() => setNow(new Date()), 1000)
@@ -115,6 +116,7 @@ export default function App() {
             main: mainCode && mainName ? `${mainName}` : '',
             sub: subCode && subName ? `${subName}` : '',
           })
+          setIsModalOpen(true)
         } else {
           setRightInfo(null)
           alert(result.message || 'ไม่สามารถตรวจสอบสิทธิได้')
@@ -124,6 +126,10 @@ export default function App() {
         setRightInfo(null)
         alert('ไม่สามารถตรวจสอบสิทธิได้')
       })
+  }
+
+  const closeModal = () => {
+    setIsModalOpen(false)
   }
 
   return (
@@ -151,15 +157,6 @@ export default function App() {
             <img src={cardImage} alt="ตัวอย่างบัตรประชาชน" />
           )}
         </div>
-        {rightInfo && (
-          <div className="rights-info">
-            <div>หมายเลขบัตรประชาชน: {rightInfo.cid}</div>
-            <div>ชื่อ: {rightInfo.name}</div>
-            <div>อายุ: {rightInfo.age}</div>
-            <div>สิทธิหลัก: {rightInfo.main}</div>
-            <div>สิทธิรอง: {rightInfo.sub}</div>
-          </div>
-        )}
         <div className="buttons">
           <button className="btn primary" onClick={handleConfirm}>
             ยืนยันตัวตน
@@ -174,6 +171,22 @@ export default function App() {
         </div>
         
       </main>
+      {isModalOpen && rightInfo && (
+        <div className="modal">
+          <div className="modal-content">
+            <div className="rights-info">
+              <div>หมายเลขบัตรประชาชน: {rightInfo.cid}</div>
+              <div>ชื่อ: {rightInfo.name}</div>
+              <div>อายุ: {rightInfo.age}</div>
+              <div>สิทธิหลัก: {rightInfo.main}</div>
+              <div>สิทธิรอง: {rightInfo.sub}</div>
+            </div>
+            <button className="btn secondary modal-close" onClick={closeModal}>
+              ปิด
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
