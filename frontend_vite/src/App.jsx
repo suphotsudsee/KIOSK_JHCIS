@@ -78,7 +78,7 @@ export default function App() {
       .then((result) => {
         if (result.ok && result.data) {
           setCardInfo(result.data)
-          console.log(result.data);
+//        console.log(result.data);
 
         } else {
           setCardInfo(null)
