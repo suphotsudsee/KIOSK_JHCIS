@@ -96,6 +96,7 @@ export default function App() {
       .then((res) => res.json())
       .then((result) => {
         const data = result.data || result
+  //      console.log(data)
         if (data && !data.error) {
           const cid = getField(data, ['cid', 'pid', 'nationalId', 'citizenId'])
           const fname = getField(data, ['firstname', 'fname', 'firstNameTH', 'name'])
@@ -104,15 +105,15 @@ export default function App() {
             getField(data, ['birthdate', 'birthDate', 'dob', 'birthday'])
           )
           const mainCode = getField(data, ['mainInscl', 'mainInsclCode'])
-          const mainName = getField(data, ['mainInsclName'])
+          const mainName = getField(data, ['mainInsclName','mainInscl'])
           const subCode = getField(data, ['subInscl', 'subInsclCode'])
-          const subName = getField(data, ['subInsclName'])
+          const subName = getField(data, ['subInsclName','subInscl'])
           setRightInfo({
             cid,
             name: `${fname} ${lname}`.trim(),
             age,
-            main: mainCode && mainName ? `(${mainCode}) ${mainName}` : '',
-            sub: subCode && subName ? `(${subCode}) ${subName}` : '',
+            main: mainCode && mainName ? `${mainName}` : '',
+            sub: subCode && subName ? `${subName}` : '',
           })
         } else {
           setRightInfo(null)
