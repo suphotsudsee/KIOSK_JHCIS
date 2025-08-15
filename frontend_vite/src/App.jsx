@@ -4,9 +4,23 @@ import './App.css'
 
 export default function App() {
   const [now, setNow] = useState(new Date())
+  const [hospital, setHospital] = useState(null)
+  const [dbError, setDbError] = useState(false)
 
   useEffect(() => {
     const timer = setInterval(() => setNow(new Date()), 1000)
+
+    fetch('http://localhost:3001/jhcis/api/v1/hospital')
+      .then((res) => res.json())
+      .then((result) => {
+        if (result.ok && result.data) {
+          setHospital(result.data)
+        } else {
+          setDbError(true)
+        }
+      })
+      .catch(() => setDbError(true))
+
     return () => clearInterval(timer)
   }, [])
 
@@ -18,6 +32,10 @@ export default function App() {
   })
   const timeStr = now.toLocaleTimeString('th-TH')
 
+  const address = hospital
+    ? `หมู่ ${hospital.mu} ตำบล${hospital.subdistname} อำเภอ${hospital.distname} จังหวัด${hospital.provname}`
+    : ''
+
   return (
     <div className="container">
       <div className="timestamp-bar">
@@ -26,9 +44,9 @@ export default function App() {
       <header className="header">
         <img src="/vite.svg" alt="โลโก้" className="hospital-logo" />
         <div className="hospital-info">
-          <div className="hospital-name">รพ.สต.นาฟิน</div>
+          <div className="hospital-name">{hospital ? hospital.hosname : ''}</div>
           <div className="hospital-address">
-            หมู่ 02 ตำบลนาฟิน อำเภอศรีเมืองใหม่ จังหวัดอุบลราชธานี
+            {dbError ? 'ติดต่อฐานข้อมูลไม่ได้' : address}
           </div>
         </div>
       </header>
