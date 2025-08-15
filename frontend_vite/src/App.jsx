@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import cardImage from './assets/react.svg'
+import printerIcon from './assets/printer.svg'
 import ThaiIDCard from './components/ThaiIDCard'
 import './App.css'
 
@@ -80,9 +81,13 @@ export default function App() {
           <button className="btn primary" onClick={handleConfirm}>
             ยืนยันตัวตน
           </button>
-          <button className="btn danger">ยกเลิกการโดยไม่ยืนยันตัวตน</button>
-          <button className="btn secondary">พิมพ์บัตรคิว</button>
-          <button className="btn muted">ปิดสิทธิ(ยืนยันตัวตน)</button>
+          <button className="btn danger">เปิดบริการโดยไม่ยืนยันตัวตน</button>
+          <button className="btn secondary">เช็คสิทธิรักษาพยาบาล</button>
+          <button className="btn muted">
+            <img src={printerIcon} alt="ไอคอนพิมพ์" className="icon" />
+            พิมพ์บัตรคิว
+          </button>
+          <button className="btn danger">ปิดสิทธิ(ยืนยันตัวตน)</button>
         </div>
         {cardInfo && <ThaiIDCard info={cardInfo} />}
       </main>
