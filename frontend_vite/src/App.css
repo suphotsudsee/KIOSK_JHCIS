@@ -100,6 +100,20 @@
   height: 24px;
 }
 
+.rights-info {
+  margin-top: 1rem;
+  text-align: left;
+  background-color: #e0f2f1;
+  padding: 1rem;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 360px;
+}
+
+.rights-info div {
+  margin-bottom: 0.25rem;
+}
+
 .id-card {
   margin-top: 1rem;
   background-color: #e0f7fa;
