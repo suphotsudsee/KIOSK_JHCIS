@@ -90,3 +90,22 @@
 .btn.muted {
   background-color: #bdbdbd;
 }
+
+.card-info {
+  margin-top: 1rem;
+  background-color: #e0f7fa;
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: left;
+  width: 100%;
+  max-width: 360px;
+}
+
+.card-info .row {
+  margin-bottom: 0.5rem;
+}
+
+.card-info .label {
+  display: block;
+  font-weight: 700;
+}
