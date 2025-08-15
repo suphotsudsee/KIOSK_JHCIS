@@ -46,7 +46,7 @@ export default function App() {
           setCardInfo(result.data)
         } else {
           setCardInfo(null)
-          alert('ไม่สามารถอ่านข้อมูลบัตรได้')
+          alert(result.message || 'ไม่สามารถอ่านข้อมูลบัตรได้')
         }
       })
       .catch(() => {
