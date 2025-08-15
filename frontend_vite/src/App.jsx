@@ -92,15 +92,17 @@ export default function App() {
   }
 
   const handleCheckRight = () => {
-    fetch('http://localhost:3001/jhcis/api/v1/read')
+    fetch('http://localhost:8189/api/smartcard/read?readImageFlag=false')
       .then((res) => res.json())
       .then((result) => {
-        if (result.ok && result.data) {
-          const data = result.data
+        const data = result.data || result
+        if (data && !data.error) {
           const cid = getField(data, ['cid', 'pid', 'nationalId', 'citizenId'])
           const fname = getField(data, ['firstname', 'fname', 'firstNameTH', 'name'])
           const lname = getField(data, ['lastname', 'lname', 'lastNameTH', 'surname'])
-          const age = calcAge(getField(data, ['birthdate', 'birthDate', 'dob', 'birthday']))
+          const age = calcAge(
+            getField(data, ['birthdate', 'birthDate', 'dob', 'birthday'])
+          )
           const mainCode = getField(data, ['mainInscl', 'mainInsclCode'])
           const mainName = getField(data, ['mainInsclName'])
           const subCode = getField(data, ['subInscl', 'subInsclCode'])
