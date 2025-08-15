@@ -48,10 +48,21 @@ exports.read = (req, res) => {
       } else {
         // อ่านข้อมูลสำเร็จ
         logger.info("Card data read successfully");
+
+        // แปลงข้อมูลภาพจาก Buffer เป็น Base64 string ก่อนส่งให้ฝั่ง client
+        const cardData = { ...data };
+        if (cardData && cardData.photo) {
+          if (Buffer.isBuffer(cardData.photo)) {
+            cardData.photo = cardData.photo.toString("base64");
+          } else if (cardData.photo.data) {
+            cardData.photo = Buffer.from(cardData.photo.data).toString("base64");
+          }
+        }
+
         res.status(200).send({
           ok: true,
           message: "อ่านข้อมูลบัตรสำเร็จ",
-          data: data,
+          data: cardData,
         });
       }
     } catch (error) {
