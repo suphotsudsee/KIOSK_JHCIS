@@ -71,6 +71,10 @@
   border-radius: 8px;
   cursor: pointer;
   color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
 }
 
 .btn.primary {
@@ -89,6 +93,11 @@
 
 .btn.muted {
   background-color: #bdbdbd;
+}
+
+.btn .icon {
+  width: 24px;
+  height: 24px;
 }
 
 .id-card {
