@@ -46,6 +46,8 @@ export default function App() {
       .then((result) => {
         if (result.ok && result.data) {
           setCardInfo(result.data)
+          console.log(result.data);
+          
         } else {
           setCardInfo(null)
           alert(result.message || 'ไม่สามารถอ่านข้อมูลบัตรได้')

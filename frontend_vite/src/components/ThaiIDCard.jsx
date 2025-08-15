@@ -66,14 +66,14 @@ export default function ThaiIDCard({ info }) {
 
   return (
     <div className="thai-id-card" style={bgStyle}>
-      <div className="field cid">{formatCid(getField(info, ['cid', 'pid', 'nationalId']))}</div>
+      <div className="field cid">{formatCid(getField(info, ['cid', 'pid', 'nationalId','citizenId']))}</div>
       <div className="field name">{getField(info, ['firstname', 'fname', 'firstNameTH', 'name'])}</div>
       <div className="field lastname">{getField(info, ['lastname', 'lname', 'lastNameTH', 'surname'])}</div>
-      <div className="field dob">{formatDob(getField(info, ['birthdate', 'birthDate', 'dob']))}</div>
+      <div className="field dob">{formatDob(getField(info, ['birthdate', 'birthDate', 'dob','birthday']))}</div>
       <div className="field address">{formatAddress(info)}</div>
-      {photoSrc && <img className="photo" src={photoSrc} alt="card" />}
-      <div className="field issue">{formatDate(getField(info, ['issueDate']))}</div>
-      <div className="field expire">{formatDate(getField(info, ['expireDate', 'expiryDate']))}</div>
+      {photoSrc && <img className="photo" src={photo} alt="card" />}
+      <div className="field issue">{formatDate(getField(info, ['issueDate','issue']))}</div>
+      <div className="field expire">{formatDate(getField(info, ['expireDate', 'expiryDate','expire']))}</div>
     </div>
   )
 }
