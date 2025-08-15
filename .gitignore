@@ -1,2 +1,3 @@
 backend/logs/*.*
 backend/node_modules/*.*
+frontend/server/node_modules/*.*
