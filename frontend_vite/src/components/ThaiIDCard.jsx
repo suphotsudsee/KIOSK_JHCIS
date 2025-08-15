@@ -1,4 +1,5 @@
 import React from 'react'
+import './ThaiIDCard.css'
 
 export default function ThaiIDCard({ info }) {
   const getField = (obj, keys) => {
@@ -57,47 +58,19 @@ export default function ThaiIDCard({ info }) {
 
   const photo = getField(info, ['photo'])
   const photoSrc = photo ? `data:image/jpeg;base64,${photo}` : ''
+  const bg = getField(info, ['cardBg', 'bg', 'background'])
+  const bgStyle = bg ? { backgroundImage: `url(data:image/png;base64,${bg})` } : {}
 
   return (
-    <div className="id-card">
-      <div className="id-card-header">Thai National ID Card</div>
-      <div className="id-card-body">
-        <div className="id-card-chip" />
-        <div className="id-card-details">
-          <div className="row">
-            <span className="label">Identification Number</span>
-            <span>{formatCid(getField(info, ['cid', 'pid', 'nationalId']))}</span>
-          </div>
-          <div className="row">
-            <span className="label">Name</span>
-            <span>{getField(info, ['firstname', 'fname', 'firstNameTH', 'name'])}</span>
-          </div>
-          <div className="row">
-            <span className="label">Last Name</span>
-            <span>{getField(info, ['lastname', 'lname', 'lastNameTH', 'surname'])}</span>
-          </div>
-          <div className="row">
-            <span className="label">Date of Birth</span>
-            <span>{formatDob(getField(info, ['birthdate', 'birthDate', 'dob']))}</span>
-          </div>
-          <div className="row">
-            <span className="label">Address</span>
-            <span className="address">{formatAddress(info)}</span>
-          </div>
-        </div>
-        {photoSrc && <img className="id-card-photo" src={photoSrc} alt="card" />}
-      </div>
-      <div className="id-card-footer">
-        <div className="column">
-          <span className="label">Date of Issue</span>
-          <span>{formatDate(getField(info, ['issueDate']))}</span>
-        </div>
-        <div className="column">
-          <span className="label">Date of Expiry</span>
-          <span>{formatDate(getField(info, ['expireDate', 'expiryDate']))}</span>
-        </div>
-      </div>
+    <div className="thai-id-card" style={bgStyle}>
+      <div className="field cid">{formatCid(getField(info, ['cid', 'pid', 'nationalId']))}</div>
+      <div className="field name">{getField(info, ['firstname', 'fname', 'firstNameTH', 'name'])}</div>
+      <div className="field lastname">{getField(info, ['lastname', 'lname', 'lastNameTH', 'surname'])}</div>
+      <div className="field dob">{formatDob(getField(info, ['birthdate', 'birthDate', 'dob']))}</div>
+      <div className="field address">{formatAddress(info)}</div>
+      {photoSrc && <img className="photo" src={photoSrc} alt="card" />}
+      <div className="field issue">{formatDate(getField(info, ['issueDate']))}</div>
+      <div className="field expire">{formatDate(getField(info, ['expireDate', 'expiryDate']))}</div>
     </div>
   )
 }
-
