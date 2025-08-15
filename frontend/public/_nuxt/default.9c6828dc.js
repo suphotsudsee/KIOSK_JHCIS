@@ -1,1 +1,0 @@
-import{y as t,o as a,j as n,N as s}from"./entry.d3560666.js";const o={},_={id:"header",class:"bg-palette-background mt-0 max-w-screen-xl max-h-2xl min-w-fixed min-h-fixed max-h-fixed"};function c(e,d){return a(),n("div",_,[s(e.$slots,"default")])}const l=t(o,[["render",c]]);export{l as default};

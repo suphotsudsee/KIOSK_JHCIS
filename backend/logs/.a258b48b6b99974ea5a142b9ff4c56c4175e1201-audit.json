@@ -14,6 +14,11 @@
             "date": 1755232106207,
             "name": "logs\\api-error-2025-08-15-11.log",
             "hash": "0e0fda4bf291f277be6d75abfc580d920791eec9ae1efd59a6106e4cc833f3c1"
+        },
+        {
+            "date": 1755240044917,
+            "name": "logs\\api-error-2025-08-15-13.log",
+            "hash": "f942eea2bc0de5d05f7c2cb86921577a282df24853e0b6a07eae05bedfe1f269"
         }
     ],
     "hashType": "sha256"

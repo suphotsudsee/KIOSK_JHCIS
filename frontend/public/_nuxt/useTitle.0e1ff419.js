@@ -1,1 +1,0 @@
-import"./entry.d3560666.js";import{u as n}from"./fetch.66222654.js";const p=async t=>{const e="http://localhost:3001",{data:o,pending:s,error:a,refresh:r}=await n(`${e}/jhcis/api/v1/title/${encodeURIComponent(t)}`,"$Ay987yD6O7");return{data:o,pending:s,error:a,refresh:r}};export{p as u};
