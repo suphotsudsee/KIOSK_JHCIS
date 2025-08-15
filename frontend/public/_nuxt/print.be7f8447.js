@@ -1,0 +1,1 @@
+import{y as t,o as s,j as o,N as r}from"./entry.d3560666.js";const c={},n={class:"bg-white"};function a(e,_){return s(),o("div",n,[r(e.$slots,"default")])}const d=t(c,[["render",a]]);export{d as default};

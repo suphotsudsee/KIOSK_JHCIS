@@ -1,0 +1,40 @@
+<service>
+	<id>NHSOSecureSmartCardAgent</id>
+	<name>NHSOSecureSmartCardAgent</name>
+	<description>Smart Card Agent เชื่อมต่อข้อมูลการขอรหัส New Authen กับ NHSO Services.</description>
+	<workingdirectory>%BASE%\</workingdirectory>
+	<logpath>%BASE%\logs</logpath>
+	<logmode>rotate</logmode>
+
+	<executable>%BASE%\jre\bin\java</executable>
+	<stoptimeout>5 sec</stoptimeout>
+
+	<!-- ################### ส่วนนี้สามารถแก้ค่าได้ ################ -->
+
+	<!-- กรณีต้องการตั้ง proxy ให้ un-comment ส่วนถัดไป และ ให้แทนที่ proxy-server และ port -->
+	<!--
+		<startargument>-Dhttps.proxyHost=proxy-server</startargument>
+		<startargument>-Dhttps.proxyPort=8080</startargument>
+    -->
+
+	<!-- กรณี proxy server require authentication ให้ un-comment ส่วนถัดไป และ แทนค่า user/password -->
+	<!--
+		<startargument>-Dhttps.proxyUser=change-user</startargument>
+		<startargument>-Dhttps.proxyPassword=somePassword</startargument>
+	-->
+	<!-- #################################################### -->
+
+
+	<startargument>-Dspring.profiles.active=prod</startargument>
+	<startargument>-Dspring.config.additional-location=userconfig.properties</startargument>
+	<!--	<startargument>-Xmx4g</startargument>-->
+	<!--	<startargument>-Dspring.config.additional-location="%BASE%\userconfig.properties"</startargument>-->
+
+	<startargument>-Dspring.application.admin.enabled=true</startargument>
+	<startargument>-Dcom.sun.management.jmxremote.host=localhost</startargument>
+	<startargument>-Dcom.sun.management.jmxremote.port=50204</startargument>
+	<startargument>-Dcom.sun.management.jmxremote.authenticate=false</startargument>
+	<startargument>-Dcom.sun.management.jmxremote.ssl=false</startargument>
+	<startargument>-jar</startargument>
+	<startargument>secureagent.jar</startargument>
+</service>

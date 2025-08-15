@@ -1,0 +1,55 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 20
+    },
+    "auditLog": "logs\\.a258b48b6b99974ea5a142b9ff4c56c4175e1201-audit.json",
+    "files": [
+        {
+            "date": 1749258114664,
+            "name": "logs\\api-error-2025-06-07-08.log",
+            "hash": "62fa7918801714b73e5acdaabb158552cedaec2f01221651f4d3c2e51e6491bc"
+        },
+        {
+            "date": 1749268878582,
+            "name": "logs\\api-error-2025-06-07-11.log",
+            "hash": "f21fcfd57aadf0331ae69a764827122503a03029e5ac8e21cc9b41dc1577e5c9"
+        },
+        {
+            "date": 1749275597091,
+            "name": "logs\\api-error-2025-06-07-12.log",
+            "hash": "0451e3c90c1db780833dce2a2b4e0db70db407d8f3f37d1ee2ad18c876c1ea51"
+        },
+        {
+            "date": 1749350370113,
+            "name": "logs\\api-error-2025-06-08-09.log",
+            "hash": "a0c155cb9f6506187948e3b5b18ff2675926f19654f706f71f500390c51b3f3b"
+        },
+        {
+            "date": 1749365179060,
+            "name": "logs\\api-error-2025-06-08-13.log",
+            "hash": "a5c686f7e805cfcdece3b242ced0a4ae691c0211d24d3d11186c8d3c8b6cc605"
+        },
+        {
+            "date": 1749367587181,
+            "name": "logs\\api-error-2025-06-08-14.log",
+            "hash": "15d96b3a1cda0672bfebd7fddbec62da230f86d0cf78cc65c7aa615341cf498c"
+        },
+        {
+            "date": 1749373130790,
+            "name": "logs\\api-error-2025-06-08-15.log",
+            "hash": "db2e02d54d52a748dd7458cbf21ad335fdf7bba282a9fc329228c36f6562adc4"
+        },
+        {
+            "date": 1750834618619,
+            "name": "logs\\api-error-2025-06-25-13.log",
+            "hash": "f49ce2df8546a80fb3d1bbeeeaef8f6f2b2cce9e092cebcb4a6b51ba922acf56"
+        },
+        {
+            "date": 1750835368083,
+            "name": "logs\\api-error-2025-06-25-14.log",
+            "hash": "38f0cd5069b4d52fb5e356b7ee678f2918f6a6671781f87f5ef3e9d55c3cd630"
+        }
+    ],
+    "hashType": "sha256"
+}
