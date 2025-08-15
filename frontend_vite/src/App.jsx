@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
-import cardImage from './assets/react.svg'
+import cardImage from './assets/cidtemp.png'
+import cardTemp from './assets/Public_Health.png'
 import printerIcon from './assets/printer.svg'
 import ThaiIDCard from './components/ThaiIDCard'
 import './App.css'
@@ -62,7 +63,7 @@ export default function App() {
         {`${weekday} ที่ ${dateStr} เวลา ${timeStr} น.`}
       </div>
       <header className="header">
-        <img src="/vite.svg" alt="โลโก้" className="hospital-logo" />
+        <img src={cardTemp} alt="โลโก้" className="hospital-logo" />
         <div className="hospital-info">
           <div className="hospital-name">{hospital ? hospital.hosname : ''}</div>
           <div className="hospital-address">
@@ -76,6 +77,7 @@ export default function App() {
         </p>
         <div className="card-image">
           <img src={cardImage} alt="ตัวอย่างบัตรประชาชน" />
+          {cardInfo && <ThaiIDCard info={cardInfo} />}
         </div>
         <div className="buttons">
           <button className="btn primary" onClick={handleConfirm}>
@@ -89,7 +91,7 @@ export default function App() {
           </button>
           <button className="btn danger">ปิดสิทธิ(ยืนยันตัวตน)</button>
         </div>
-        {cardInfo && <ThaiIDCard info={cardInfo} />}
+        
       </main>
     </div>
   )
