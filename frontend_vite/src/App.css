@@ -91,21 +91,70 @@
   background-color: #bdbdbd;
 }
 
-.card-info {
+.id-card {
   margin-top: 1rem;
   background-color: #e0f7fa;
-  padding: 1rem;
   border-radius: 8px;
-  text-align: left;
+  border: 1px solid #999;
+  padding: 0.5rem 1rem;
   width: 100%;
-  max-width: 360px;
+  max-width: 460px;
+  text-align: left;
 }
 
-.card-info .row {
+.id-card-header {
+  text-align: center;
+  font-weight: 700;
   margin-bottom: 0.5rem;
 }
 
-.card-info .label {
+.id-card-body {
+  display: flex;
+}
+
+.id-card-chip {
+  width: 60px;
+  height: 40px;
+  background: #ffeb3b;
+  border: 1px solid #999;
+  border-radius: 4px;
+  margin-right: 0.5rem;
+  flex-shrink: 0;
+}
+
+.id-card-details {
+  flex: 1;
+}
+
+.id-card-details .row {
+  margin-bottom: 0.25rem;
+}
+
+.id-card-details .label {
+  display: block;
+  font-weight: 700;
+}
+
+.id-card-photo {
+  width: 120px;
+  height: 140px;
+  object-fit: cover;
+  margin-left: 0.5rem;
+  border-radius: 4px;
+}
+
+.id-card-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+}
+
+.id-card-footer .column {
+  flex: 1;
+}
+
+.id-card-footer .label {
   display: block;
   font-weight: 700;
 }
