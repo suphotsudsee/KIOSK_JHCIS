@@ -6,6 +6,7 @@ export default function App() {
   const [now, setNow] = useState(new Date())
   const [hospital, setHospital] = useState(null)
   const [dbError, setDbError] = useState(false)
+  const [cardInfo, setCardInfo] = useState(null)
 
   useEffect(() => {
     const timer = setInterval(() => setNow(new Date()), 1000)
@@ -36,6 +37,23 @@ export default function App() {
     ? `หมู่ ${hospital.mu} ตำบล${hospital.subdistname} อำเภอ${hospital.distname} จังหวัด${hospital.provname}`
     : ''
 
+  const handleConfirm = () => {
+    fetch('http://localhost:3001/jhcis/api/v1/read')
+      .then((res) => res.json())
+      .then((result) => {
+        if (result.ok && result.data) {
+          setCardInfo(result.data)
+        } else {
+          setCardInfo(null)
+          alert('ไม่สามารถอ่านข้อมูลบัตรได้')
+        }
+      })
+      .catch(() => {
+        setCardInfo(null)
+        alert('ไม่สามารถอ่านข้อมูลบัตรได้')
+      })
+  }
+
   return (
     <div className="container">
       <div className="timestamp-bar">
@@ -58,11 +76,18 @@ export default function App() {
           <img src={cardImage} alt="ตัวอย่างบัตรประชาชน" />
         </div>
         <div className="buttons">
-          <button className="btn primary">ยืนยันตัวตน</button>
+          <button className="btn primary" onClick={handleConfirm}>
+            ยืนยันตัวตน
+          </button>
           <button className="btn danger">ยกเลิกการโดยไม่ยืนยันตัวตน</button>
           <button className="btn secondary">พิมพ์บัตรคิว</button>
           <button className="btn muted">ปิดสิทธิ(ยืนยันตัวตน)</button>
         </div>
+        {cardInfo && (
+          <div className="card-info">
+            <pre>{JSON.stringify(cardInfo, null, 2)}</pre>
+          </div>
+        )}
       </main>
     </div>
   )
