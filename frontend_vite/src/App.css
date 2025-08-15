@@ -139,6 +139,35 @@
   margin-top: 1rem;
 }
 
+.keypad-input {
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 1.2rem;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.keypad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+}
+
+.key {
+  padding: 0.75rem;
+  font-size: 1.2rem;
+  background-color: #e0e0e0;
+  border: none;
+  border-radius: 8px;
+}
+
+.keypad-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
 .id-card {
   margin-top: 1rem;
   background-color: #e0f7fa;

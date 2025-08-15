@@ -12,6 +12,10 @@ export default function App() {
   const [cardInfo, setCardInfo] = useState(null)
   const [rightInfo, setRightInfo] = useState(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isCidModalOpen, setIsCidModalOpen] = useState(false)
+  const [cidInput, setCidInput] = useState('')
+  const [personInfo, setPersonInfo] = useState(null)
+  const [isPersonModalOpen, setIsPersonModalOpen] = useState(false)
 
   useEffect(() => {
     const timer = setInterval(() => setNow(new Date()), 1000)
@@ -128,6 +132,46 @@ export default function App() {
       })
   }
 
+  const handleOpenWithoutId = () => {
+    setCidInput('')
+    setIsCidModalOpen(true)
+  }
+
+  const handleKeypadClick = (key) => {
+    if (key === 'del') {
+      setCidInput((prev) => prev.slice(0, -1))
+    } else if (cidInput.length < 13) {
+      setCidInput((prev) => prev + key)
+    }
+  }
+
+  const handleSearchCid = () => {
+    if (cidInput.length !== 13) return
+    fetch(`http://localhost:3001/jhcis/api/v1/person/${cidInput}`)
+      .then((res) => res.json())
+      .then((result) => {
+        if (result.ok && result.data) {
+          setPersonInfo(result.data)
+        } else {
+          setPersonInfo(null)
+        }
+        setIsPersonModalOpen(true)
+      })
+      .catch(() => {
+        setPersonInfo(null)
+        setIsPersonModalOpen(true)
+      })
+    setIsCidModalOpen(false)
+  }
+
+  const closeCidModal = () => {
+    setIsCidModalOpen(false)
+  }
+
+  const closePersonModal = () => {
+    setIsPersonModalOpen(false)
+  }
+
   const closeModal = () => {
     setIsModalOpen(false)
   }
@@ -161,7 +205,7 @@ export default function App() {
           <button className="btn primary" onClick={handleConfirm}>
             ยืนยันตัวตน
           </button>
-          <button className="btn danger">เปิดบริการโดยไม่ยืนยันตัวตน</button>
+          <button className="btn danger" onClick={handleOpenWithoutId}>เปิดบริการโดยไม่ยืนยันตัวตน</button>
           <button className="btn secondary" onClick={handleCheckRight}>เช็คสิทธิรักษาพยาบาล</button>
           <button className="btn muted">
             <img src={printerIcon} alt="ไอคอนพิมพ์" className="icon" />
@@ -182,6 +226,56 @@ export default function App() {
               <div>สิทธิรอง: {rightInfo.sub}</div>
             </div>
             <button className="btn secondary modal-close" onClick={closeModal}>
+              ปิด
+            </button>
+          </div>
+        </div>
+      )}
+
+      {isCidModalOpen && (
+        <div className="modal">
+          <div className="modal-content">
+            <input
+              type="text"
+              className="keypad-input"
+              value={cidInput}
+              placeholder="กรอกเลขบัตรประชาชน"
+              readOnly
+            />
+            <div className="keypad">
+              {[1,2,3,4,5,6,7,8,9,0].map((num) => (
+                <button
+                  key={num}
+                  className="key"
+                  onClick={() => handleKeypadClick(num.toString())}
+                >
+                  {num}
+                </button>
+              ))}
+              <button className="key" onClick={() => handleKeypadClick('del')}>
+                ลบ
+              </button>
+            </div>
+            <div className="keypad-actions">
+              <button className="btn muted" onClick={closeCidModal}>ปิด</button>
+              <button className="btn secondary" onClick={handleSearchCid}>ค้นหา</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {isPersonModalOpen && (
+        <div className="modal">
+          <div className="modal-content">
+            {personInfo ? (
+              <div className="rights-info">
+                <div>หมายเลขบัตรประชาชน: {personInfo.idcard}</div>
+                <div>ชื่อ: {`${personInfo.titlename || ''}${personInfo.fname || ''} ${personInfo.lname || ''}`}</div>
+              </div>
+            ) : (
+              <div className="rights-info">ไม่พบข้อมูล โปรดติดต่อ จนท.</div>
+            )}
+            <button className="btn secondary modal-close" onClick={closePersonModal}>
               ปิด
             </button>
           </div>
