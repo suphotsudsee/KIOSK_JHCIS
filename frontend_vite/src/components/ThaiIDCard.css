@@ -1,0 +1,60 @@
+.thai-id-card {
+  position: relative;
+  width: 460px;
+  height: 300px;
+  margin-top: 1rem;
+  background-size: cover;
+  background-position: center;
+  font-size: 0.9rem;
+}
+
+.thai-id-card .field {
+  position: absolute;
+}
+
+.thai-id-card .cid {
+  top: 45px;
+  left: 140px;
+}
+
+.thai-id-card .name {
+  top: 95px;
+  left: 140px;
+}
+
+.thai-id-card .lastname {
+  top: 125px;
+  left: 140px;
+}
+
+.thai-id-card .dob {
+  top: 155px;
+  left: 140px;
+}
+
+.thai-id-card .address {
+  top: 185px;
+  left: 140px;
+  width: 260px;
+}
+
+.thai-id-card .issue {
+  bottom: 45px;
+  left: 50px;
+}
+
+.thai-id-card .expire {
+  bottom: 45px;
+  right: 60px;
+  text-align: right;
+}
+
+.thai-id-card .photo {
+  position: absolute;
+  top: 70px;
+  right: 40px;
+  width: 100px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 4px;
+}
