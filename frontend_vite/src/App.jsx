@@ -164,6 +164,28 @@ export default function App() {
     setIsCidModalOpen(false)
   }
 
+  const handleConfirmPerson = () => {
+    if (!personInfo) return
+    fetch('http://localhost:3001/jhcis/api/v1/visit/newvisit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        pcucode: personInfo.pcucodeperson,
+        pid: personInfo.pid,
+        rightcode: personInfo.rightcode,
+        rightno: personInfo.rightno,
+        hosmain: personInfo.hosmain,
+        hossub: personInfo.hossub,
+      }),
+    })
+      .then(() => {
+        setPersonInfo(null)
+        setCidInput('')
+      })
+      .catch(() => {})
+      .finally(() => setIsPersonModalOpen(false))
+  }
+
   const closeCidModal = () => {
     setIsCidModalOpen(false)
   }
@@ -268,16 +290,26 @@ export default function App() {
         <div className="modal">
           <div className="modal-content">
             {personInfo ? (
-              <div className="rights-info">
-                <div>หมายเลขบัตรประชาชน: {personInfo.idcard}</div>
-                <div>ชื่อ: {`${personInfo.titlename || ''}${personInfo.fname || ''} ${personInfo.lname || ''}`}</div>
-              </div>
+              <>
+                <div className="rights-info">
+                  <div>
+                    HN:{personInfo.pid} {`${personInfo.titlename || ''}${personInfo.fname || ''} ${personInfo.lname || ''}`}
+                  </div>
+                  <div>ยืนยันการเปิดบริการ</div>
+                </div>
+                <div className="modal-actions">
+                  <button className="btn primary" onClick={handleConfirmPerson}>ยืนยัน</button>
+                  <button className="btn danger" onClick={closePersonModal}>ยกเลิก</button>
+                </div>
+              </>
             ) : (
-              <div className="rights-info">ไม่พบข้อมูล โปรดติดต่อ จนท.</div>
+              <>
+                <div className="rights-info">ไม่พบข้อมูล โปรดติดต่อ จนท.</div>
+                <button className="btn secondary modal-close" onClick={closePersonModal}>
+                  ปิด
+                </button>
+              </>
             )}
-            <button className="btn secondary modal-close" onClick={closePersonModal}>
-              ปิด
-            </button>
           </div>
         </div>
       )}

@@ -168,6 +168,17 @@
   margin-top: 1rem;
 }
 
+.modal-actions {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.modal-actions .btn {
+  flex: 1;
+}
+
 .id-card {
   margin-top: 1rem;
   background-color: #e0f7fa;
