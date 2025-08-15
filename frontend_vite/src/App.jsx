@@ -1,35 +1,51 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useEffect, useState } from 'react'
+import cardImage from './assets/react.svg'
 import './App.css'
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+  const [now, setNow] = useState(new Date())
+
+  useEffect(() => {
+    const timer = setInterval(() => setNow(new Date()), 1000)
+    return () => clearInterval(timer)
+  }, [])
+
+  const weekday = now.toLocaleDateString('th-TH', { weekday: 'long' })
+  const dateStr = now.toLocaleDateString('th-TH', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  })
+  const timeStr = now.toLocaleTimeString('th-TH')
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="container">
+      <div className="timestamp-bar">
+        {`${weekday} ที่ ${dateStr} เวลา ${timeStr} น.`}
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
+      <header className="header">
+        <img src="/vite.svg" alt="โลโก้" className="hospital-logo" />
+        <div className="hospital-info">
+          <div className="hospital-name">รพ.สต.นาฟิน</div>
+          <div className="hospital-address">
+            หมู่ 02 ตำบลนาฟิน อำเภอศรีเมืองใหม่ จังหวัดอุบลราชธานี
+          </div>
+        </div>
+      </header>
+      <main className="main">
+        <p className="instruction">
+          กรุณาเสียบบัตรประชาชนก่อนยืนยันตัวตน
         </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+        <div className="card-image">
+          <img src={cardImage} alt="ตัวอย่างบัตรประชาชน" />
+        </div>
+        <div className="buttons">
+          <button className="btn primary">ยืนยันตัวตน</button>
+          <button className="btn danger">ยกเลิกการโดยไม่ยืนยันตัวตน</button>
+          <button className="btn secondary">พิมพ์บัตรคิว</button>
+          <button className="btn muted">ปิดสิทธิ(ยืนยันตัวตน)</button>
+        </div>
+      </main>
+    </div>
   )
 }
-
-export default App
