@@ -1,5 +1,6 @@
 import React from 'react'
 import './ThaiIDCard.css'
+import thaiIdBg from '../assets/thai-id-bg.png'
 
 export default function ThaiIDCard({ info }) {
   const getField = (obj, keys) => {
@@ -59,7 +60,9 @@ export default function ThaiIDCard({ info }) {
   const photo = getField(info, ['photo'])
   const photoSrc = photo ? `data:image/jpeg;base64,${photo}` : ''
   const bg = getField(info, ['cardBg', 'bg', 'background'])
-  const bgStyle = bg ? { backgroundImage: `url(data:image/png;base64,${bg})` } : {}
+  const bgStyle = bg
+    ? { backgroundImage: `url(data:image/png;base64,${bg})` }
+    : { backgroundImage: `url(${thaiIdBg})` }
 
   return (
     <div className="thai-id-card" style={bgStyle}>
