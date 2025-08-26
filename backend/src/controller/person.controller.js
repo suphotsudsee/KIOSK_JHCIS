@@ -116,6 +116,52 @@ exports.postNewPerson = (req, res) => {
 };
 
 
+exports.verifyPerson = (req, res) => {
+  if (
+    !req.body ||
+    !req.body.idcard ||
+    !req.body.prename ||
+    !req.body.fname ||
+    !req.body.lname ||
+    !req.body.birth ||
+    !req.body.sex
+  ) {
+    res.status(400).send({
+      ok: false,
+      message:
+        "idcard, prename, fname, lname, birth and sex are required!",
+      error: null,
+    });
+    return;
+  }
+
+  person.findOrCreateByCid(req.body, (err, data) => {
+    if (err) {
+      if (err.message === "house_not_found") {
+        res.status(400).send({
+          ok: false,
+          message: "House out area not found!",
+          error: null,
+        });
+      } else {
+        logger.error(err.toString());
+        res.status(500).send({
+          ok: false,
+          message: "",
+          error: err.toString(),
+        });
+      }
+    } else {
+      res.status(200).send({
+        ok: true,
+        message: "",
+        data,
+      });
+    }
+  });
+};
+
+
 exports.updateMobilePhone = (req, res) => {
   if (!req.params.pid) {
     res.status(400).send({

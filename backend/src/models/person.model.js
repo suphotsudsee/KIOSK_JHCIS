@@ -179,6 +179,43 @@ Person.addNewPerson = (data, res) => {
 };
 
 
+Person.findOrCreateByCid = (data, res) => {
+  knex("person")
+    .where("idcard", data.idcard)
+    .then(async (resPerson) => {
+      if (resPerson.length) {
+        Person.findByCid(data.idcard, res);
+      } else {
+        try {
+          const house = await knex("house")
+            .whereRaw('RIGHT(villcode,2) = "00"')
+            .first();
+
+          if (!house) {
+            res({ message: "house_not_found" }, null);
+            return;
+          }
+
+          const insertData = {
+            ...data,
+            pcucodeperson: house.pcucode,
+            hcode: house.hcode,
+          };
+
+          Person.addNewPerson(insertData, res);
+        } catch (err) {
+          logger.error(err.toString());
+          res(err, null);
+        }
+      }
+    })
+    .catch((err) => {
+      logger.error(err.toString());
+      res(err, null);
+    });
+};
+
+
 Person.updateMobilePhone = (data, res) => {
   knex("person")
     .where("pid", data.params.pid)

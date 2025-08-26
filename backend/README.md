@@ -54,6 +54,7 @@ const closeRight = async (req, res) => {
 #### 3.3 Person APIs
 - `GET /api/person/:cid` - ดึงข้อมูลบุคคล
 - `POST /api/person` - เพิ่มข้อมูลบุคคลใหม่
+- `POST /api/person/verify` - ตรวจสอบและเพิ่มบุคคลใหม่ (หมู่นอกเขต)
 - `PATCH /api/person/:pid` - อัพเดทข้อมูลบุคคล
 
 ### 4. Dependencies หลัก

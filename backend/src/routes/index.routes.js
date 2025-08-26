@@ -16,6 +16,7 @@ module.exports = (app) => {
   router.get("/person/:cid", person.getPersonByCid);
   router.get("/persons/maxpid", person.getMaxPersonPid);
   router.post("/person", person.postNewPerson);
+  router.post("/person/verify", person.verifyPerson);
   router.get("/village/outarea", village.getVillageOutArea);
   router.get("/house/:villcode", house.findByVillcode);
   router.get("/house", house.houseOutArea);
