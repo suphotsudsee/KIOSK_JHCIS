@@ -16,6 +16,7 @@ export default function App() {
   const [cidInput, setCidInput] = useState('')
   const [personInfo, setPersonInfo] = useState(null)
   const [isPersonModalOpen, setIsPersonModalOpen] = useState(false)
+  const [isExistModalOpen, setIsExistModalOpen] = useState(false)
 
   useEffect(() => {
     const timer = setInterval(() => setNow(new Date()), 1000)
@@ -77,14 +78,47 @@ export default function App() {
     return `${years} ปี ${months} เดือน ${days} วัน`
   }
 
+  const formatBirth = (dob) => {
+    if (!dob) return ''
+    const str = dob.toString().replace(/-/g, '')
+    if (str.length !== 8) return dob
+    let year = parseInt(str.slice(0, 4), 10)
+    const month = str.slice(4, 6)
+    const day = str.slice(6, 8)
+    if (year > 2400) year -= 543
+    return `${year}-${month}-${day}`
+  }
+
   const handleConfirm = () => {
     fetch('http://localhost:3001/jhcis/api/v1/read')
       .then((res) => res.json())
       .then((result) => {
         if (result.ok && result.data) {
           setCardInfo(result.data)
-//        console.log(result.data);
-
+          const cid = getField(result.data, ['cid', 'pid', 'nationalId', 'citizenId'])
+          if (cid && cid.length === 13) {
+            fetch(`http://localhost:3001/jhcis/api/v1/person/${cid}`)
+              .then((res) => res.json())
+              .then((person) => {
+                if (person.ok && person.data) {
+                  setIsExistModalOpen(true)
+                } else {
+                  const prename = getField(result.data, ['prename', 'title', 'titlename', 'prefix'])
+                  const fname = getField(result.data, ['firstname', 'fname', 'firstNameTH', 'name'])
+                  const lname = getField(result.data, ['lastname', 'lname', 'lastNameTH', 'surname'])
+                  const birth = formatBirth(
+                    getField(result.data, ['birthdate', 'birthDate', 'dob', 'birthday'])
+                  )
+                  const sex = getField(result.data, ['sex', 'gender'])
+                  fetch('http://localhost:3001/jhcis/api/v1/person/verify', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ idcard: cid, prename, fname, lname, birth, sex }),
+                  }).catch(() => {})
+                }
+              })
+              .catch(() => {})
+          }
         } else {
           setCardInfo(null)
           alert(result.message || 'ไม่สามารถอ่านข้อมูลบัตรได้')
@@ -248,6 +282,20 @@ export default function App() {
               <div>สิทธิรอง: {rightInfo.sub}</div>
             </div>
             <button className="btn secondary modal-close" onClick={closeModal}>
+              ปิด
+            </button>
+          </div>
+        </div>
+      )}
+
+      {isExistModalOpen && (
+        <div className="modal">
+          <div className="modal-content">
+            <div className="rights-info">มีข้อมูลแล้ว</div>
+            <button
+              className="btn secondary modal-close"
+              onClick={() => setIsExistModalOpen(false)}
+            >
               ปิด
             </button>
           </div>
